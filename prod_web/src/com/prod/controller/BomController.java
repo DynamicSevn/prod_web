@@ -53,7 +53,7 @@ public class BomController {
 		List<Node<Type>> rootNodeList = new ArrayList<Node<Type>>(typeList.size()); 
 		
 		
-		for(Type type:typeList){
+		for(Type type:typeList ){
 			//ArrayList默认构造为10的列表，可能会导致有null对象使前台报500错误
 			Node<Type> root = new Node<Type>(type,1);
 			rootNodeList.add(root);
