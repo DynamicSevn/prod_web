@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>主页</title>
+#parse("templet/js.html")
+#parse("templet/css.html")
+<style type="text/css">
+	.page-header{
+		margin-top: 80px;
+	}
+	.undisplay{
+		display:none;
+	}
+</style>
+</head>
+<body>
+	#parse("templet/navbar.html")
+	<div class = "col-lg-1"></div>
+	<div class = "col-lg-10">
+        <div class="page-header">
+        	<h1>$!msg
+        	</h1>
+        </div>
+		<table class="table table-striped">
+	        <thead>
+	          <tr>
+	            <th>product_id</th>
+	            <th>type_id</th>
+	            <th>name</th>
+	            <th>producer</th>
+	            <th>produce_address</th>
+	            <th>price</th>
+	            <th>operate</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	        	#foreach($prod in $prodList)
+	        	<tr>
+	        		<td>$prod.id</td>
+	        		<td>$prod.typeid</td>
+	        		<td>$prod.name</td>
+	        		<td>$prod.producer</td>
+	        		<td>$prod.address</td>
+	        		<td>$!prod.price</td>
+	        		<td>
+	        			<button class = "btn btn-primary btn-xs" onclick="updateModel('$!prod.id')" data-toggle="modal">更新</button>
+	        			<button class = "btn btn-primary btn-xs" onclick="deleteModel('$!prod.id')" data-toggle="modal">删除</button>
+	        		</td>
+	        	</tr>
+	        	#end
+	        </tbody>
+		</table>
+	</div>
+	<div class = "col-lg-1"> </div>
+		#parse("templet/update_prod_model.html")
+	#parse("templet/add_prod_model.html")
+	#parse("templet/confirm_model.html")
+	
+	#set($jq="$.")
+	<script type="text/javascript">
+        function model(){
+           
+            $("#add_prod_modal").modal('show');
+            
+        }
+        
+        function deleteModel(prod_id){
+            
+            $("#delete_prod_modal").modal('show');
+            $("#confirm").click(function(){
+                window.location.href="delete?prodId="+prod_id;
+            });
+            
+        }
+        
+        function updateModel(prod_id){
+            ${jq}ajax({
+                url:"get_by_id",
+                method:"get",
+                dataType:"JSON",
+                data:{
+                    prodId:prod_id
+                },
+                success:function(data){
+                	$("#id_id").val(data.id);
+                    $("#type_id").val(data.typeid);
+                    $("#name_id").val(data.name);
+                    $("#address_id").val(data.address);
+                    $("#producer_id").val(data.producer);
+					$("#price_id").val(data.price);
+                }
+            });                                      
+            
+        	$("#update_prod_modal").modal('show');
+        }
+	</script>
+</body>
+</html>

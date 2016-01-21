@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>主页</title>
+#parse("templet/js.html")
+#parse("templet/css.html")
+<link href="../css/bootstrap-treeview.min.css" rel="stylesheet">
+<style type="text/css">
+	.page-header{
+		margin-top: 80px;
+	}
+	.undisplay{
+		display:none;
+	}
+</style>
+</head>
+<body>
+	#parse("templet/bom_navbar.html")
+	<div class = "col-lg-1"></div>
+	<div class = "col-lg-10">
+        <div class="page-header">
+        	<h1>查看BOM表
+        	</h1>
+        </div>
+        <div>
+          <label for="treeview"></label>
+          <div id="treeview"/>
+        </div>
+		
+	</div>
+	<div class = "col-lg-1"> </div>
+	
+	#set($jq="$.")
+	<script src="../js/bootstrap-treeview.js"></script>
+	<script type="text/javascript">
+	
+		${jq}ajax({
+			url:"get_bom",
+			method:"get",
+			dataType:"JSON",
+			success:function(treeList){
+				var options = {
+						bootstrap2:false,
+						levels:5,
+			            color: "#428bca",
+			            expandIcon: 'glyphicon glyphicon-chevron-right',
+			            collapseIcon: 'glyphicon glyphicon-chevron-down',
+			            nodeIcon: 'glyphicon glyphicon-bookmark',
+						data: buildDomTree(treeList)
+				};
+				$('#treeview').treeview(options);
+			}
+		});
+	
+		function buildDomTree(treeList){
+			var data = [];
+			function walk(nodes, data){
+				if(!nodes){return; }
+				${jq}each(nodes, function (id,node){
+					var obj = {
+							id:id,
+							text:node.data.name
+					}
+					if(node.childCount>0){
+						obj.nodes = [];
+						walk(node.childNode, obj.nodes);
+					}
+					data.push(obj);
+				});
+			}
+			
+			walk(treeList, data);
+			return data;
+		}
+		
+	</script>
+</body>
+</html>

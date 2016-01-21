@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration >
+  <classPathEntry location="E:\jar\mysql-connector-java-5.1.6-bin.jar"/>
+  <ibatorContext id="content1">
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/prod" userId="root" password="sevn">
+        <property name="" value=""/>
+    </jdbcConnection>
+    
+    <!-- bean生成 -->
+    <javaModelGenerator targetPackage="com.prod.bean" targetProject="prod_web">
+    </javaModelGenerator>
+    
+    <!-- 映射文件生成 -->
+    <sqlMapGenerator targetPackage="config" targetProject="prod_web">
+    </sqlMapGenerator>
+    
+    
+ 	<!-- dao类生成 -->
+	<daoGenerator targetPackage="com.prod.dao" targetProject="prod_web" implementationPackage="com.prod.dao.impl" type="SPRING" />
+   
+    <!-- domainObjectName为对应类名 -->
+    <!--  <table tableName="USER" domainObjectName="">
+    </table>
+    <table tableName="document"></table>-->
+    <table tableName="component"></table>
+    <table tableName="prod"></table>
+    <table tableName="type"></table>
+    <!-- <table tableName="want"></table>
+    <table tableName="comment"></table> -->
+  </ibatorContext>
+</ibatorConfiguration>

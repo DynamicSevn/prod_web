@@ -1,0 +1,37 @@
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="update_type_modal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h3 class="modal-title" id="myModalLabel">型号更新</h3>
+			</div>
+			<div class="modal-body">
+				<form class="validateForm form-horizontal" role="form" action = "update" method = "post">
+				
+
+					<input id = "id_id" type="text" class="undisplay" name="id">
+				
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">名称</label>
+						<div class="col-sm-10">
+							<input id = "name_id"  type="text" class="form-control" name="name" 
+								placeholder="请输入名称">
+						</div>
+					</div>
+					
+
+					<div class="col-sm-offset-8">
+						<button type="submit" class="btn btn-primary">提交</button>
+					    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					    </button>
+				    </div>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+	</div>
