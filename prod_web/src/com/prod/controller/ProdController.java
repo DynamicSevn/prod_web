@@ -90,7 +90,7 @@ public class ProdController {
 		List<Prod> prodList = prodService.getByCondition(condition);
 		model.addAttribute("prodList", prodList);
 		if(prodList.isEmpty()){
-			model.addAttribute("msg", "搜索不到名称中有'"+condition+"'的产品");
+			model.addAttribute("msg", "搜不到名称中有'"+condition+"'的产品");
 		}else model.addAttribute("msg", "搜索名称中有'"+condition+"'的结果为：");
 		return "prod/search";
 	}
