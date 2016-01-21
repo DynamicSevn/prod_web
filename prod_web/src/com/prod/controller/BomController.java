@@ -48,7 +48,7 @@ public class BomController {
 
 	@RequestMapping(value = "/get_bom",method = RequestMethod.GET)
 	@ResponseBody
-	public List getBom() {
+	public List getBom() {    
 		List<Type> typeList= typeService.getAll();
 		List<Node<Type>> rootNodeList = new ArrayList<Node<Type>>(typeList.size()); 
 		
